@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, { useEffect }  from 'react';
 import {Box, Button, Typography, } from '@mui/material';
 import classes from './Home.module.css';
 import video from '../../utils/video/trash.mp4'
@@ -9,7 +9,11 @@ import video from '../../utils/video/trash.mp4'
 
 function UserForm({user, startedFunc}) {
 
-
+  useEffect(()=>{
+    if(window.location.pathname !== '/') {
+      window.location.pathname = '/'
+    }
+  }, [])
 
   return (
         <Box p={4} className={classes.home}>

@@ -49,7 +49,10 @@ function UserForm({db, user, colRef, noUser}) {
         }
       })
     }
-  }, [user])
+  }, [])
+
+
+  
   
   const updateInfo = async()=>{
 
@@ -66,7 +69,6 @@ function UserForm({db, user, colRef, noUser}) {
   }
     
 
-  console.log(signInDetails)
 
   return (
         <>

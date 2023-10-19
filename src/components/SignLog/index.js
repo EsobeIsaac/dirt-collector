@@ -79,6 +79,8 @@ function Sign({reauthenticating, user, db, cancelFunc}) {
     }
     
   }
+
+  
     
   return (
 

@@ -97,6 +97,8 @@ function App({sign}) {
     setWindowSize(window.innerWidth)
   }
 
+  
+
 
 
   const deleteAccount = () => { 
@@ -104,9 +106,7 @@ function App({sign}) {
   }
 
   const [logs, setLogs] = useState(false)
-
     
-
   return (
     <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -165,11 +165,18 @@ function App({sign}) {
                 <Button sx={{marginTop: '40px'}} variant='text' startIcon={<Avatar src={picture} alt='user'/>}>{user.name}</Button>
               </Link> : <Button variant='outline' endIcon={<LogIn/>} onClick={()=>{
                 setLogs(true)
+                if(windowSize < 960) {
+                  setMenuDrawer(false)
+                }
               }}>Log In</Button>
               }
               <Divider />
               <Link to={'/'}>
-                <Button variant='text' startIcon={<Dashboard/>}>Home</Button>
+                <Button variant='text' startIcon={<Dashboard/>} onClick={()=>{
+                  if(windowSize < 960) {
+                    setMenuDrawer(false)
+                  }
+                }}>Home</Button>
               </Link>
 
               {
@@ -177,13 +184,21 @@ function App({sign}) {
                   <>
                     {
                       user.role === 'user' && <Link to={'/profile'}>
-                      <Button variant='text' startIcon={<Dashboard/>}>Profile</Button>
+                      <Button variant='text' startIcon={<Dashboard/>} onClick={()=>{
+                  if(windowSize < 960) {
+                    setMenuDrawer(false)
+                  }
+                }}>Profile</Button>
                     </Link>
                     }
                     
                     {
                       user.role === 'admin' && <Link to={'/collections'}>
-                      <Button variant='text' startIcon={<Dashboard/>}>Collections</Button>
+                      <Button variant='text' startIcon={<Dashboard/>} onClick={()=>{
+                  if(windowSize < 960) {
+                    setMenuDrawer(false)
+                  }
+                }}>Collections</Button>
                     </Link>
                     }
 
@@ -191,6 +206,9 @@ function App({sign}) {
                       user.role === 'user'&& 
                         <Button variant='text' startIcon={<Delete/>} onClick={()=>{
                           deleteAccount()
+                          if(windowSize < 960) {
+                            setMenuDrawer(false)
+                          }
                         }}>Delete Account</Button>
                     }
                   </>
@@ -223,6 +241,9 @@ function App({sign}) {
             <Route element={<UserForm colRef={colRef} user={user} db={db}/>} path='/profile'/>
             <Route element={<Collection colRef={colRef} user={user} />} path='/collections'/>
             <Route element={<Collection/>} path='/support'/>
+            <Route element={<Home user={user} startedFunc = {()=>{
+              setLogs(true); 
+            }}/>} path='*'/>
 
           </Routes>
 
