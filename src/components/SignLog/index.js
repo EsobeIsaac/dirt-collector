@@ -41,7 +41,7 @@ function Sign({reauthenticating, user, db, cancelFunc}) {
     if(signState === 'reauthenticating') {
       reauthenticateWithCredential(user, EmailAuthProvider.credential(user.email, credentials.password)).then((value)=>{
         deleteUser(auth.currentUser).then(()=>{
-          window.location.reload()
+          window.location.pathname = '/'
         }).catch(err=>{
           setMessage(err.code)
         })
@@ -52,7 +52,7 @@ function Sign({reauthenticating, user, db, cancelFunc}) {
 
     if(signState === 'login') {
       signInWithEmailAndPassword(auth, credentials.email, credentials.password).then((user)=>{
-        window.location.reload()
+        window.location.pathname = '/'
       }).catch((err)=>{
         setMessage(err.code)
       })
@@ -71,7 +71,7 @@ function Sign({reauthenticating, user, db, cancelFunc}) {
           user: user.user.uid,
           role: 'user'
         }).then(()=>{
-          window.location.reload()
+          window.location.pathname = '/'
         })
       }).catch(err=>{
         setMessage(err.code)

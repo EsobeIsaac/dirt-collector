@@ -64,27 +64,24 @@ function App({sign}) {
   const [reauthenticating, setReauthenticating] = useState(false)
   
   
-  useEffect(()=>{
+  
     onAuthStateChanged(auth, (me)=>{
       if(me) {
         const docRef = doc(db, 'clients', me.uid)
         getDoc(docRef).then(doc=>{
           if(doc.data()){
             setUser({...doc.data(), uid: me.uid});
-            console.log(user, me)
           }
         }).catch(err=>{
           console.log(err.code)
         })
       }
     })
-  }, [ ])
 
   useEffect(()=>{
     if(window.location.pathname !== '/') {
       setLogs(Boolean(!user))
     }
-    console.log(user, Boolean(user))
   }, [user])
   
   
@@ -143,7 +140,7 @@ function App({sign}) {
               }} onClick={()=>{
                 signOut(auth).then(()=>{
                   console.log('logged out')
-                  window.location.reload()
+                  window.location.pathname = '/'
                 })
               }}><Logout/></IconButton> : <Button endIcon={<LogIn/>} variant='text' sx={{
                 marginRight: '1rem'
