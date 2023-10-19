@@ -191,15 +191,10 @@ function App({sign}) {
                     }
 
                     {
-                      user.role === 'user'&& <>
-                        <Link to={'/support'}>
-                          <Button variant='text' startIcon={<Dashboard/>}>Support</Button>
-                        </Link>
-
+                      user.role === 'user'&& 
                         <Button variant='text' startIcon={<Delete/>} onClick={()=>{
                           deleteAccount()
                         }}>Delete Account</Button>
-                      </>
                     }
                   </>
                 ) : null
